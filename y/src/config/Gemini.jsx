@@ -1,7 +1,8 @@
 // search for gemini api in google, select build api,
 // genrate api key , click on api code, click on doc, select javascript, copy the code
 
-const Api_key = "AIzaSyAGQfsW8-QZji6D4hq09XHuhXmkWo3SQJc";
+const Api_key = import.meta.env.VITE_APP_API_KEY;
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Access your API key as an environment variable (see "Set up your API key" above)

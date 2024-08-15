@@ -3,11 +3,17 @@ import run from "../config/Gemini";
 
 export const Context = createContext();
 
+// react createContxet is part of react set up that is use to pass data to components,
+// the value to be passed to componenta is passed as a value to the createContext component,
+// the data is called in the children components using useContext hook
+// createContext is used to avoid props drilling
+
+// THE CHILDREN COMPONENETS IS WRAP WITH CREATCONTEXT COMPONENTS AT MAINSIDE COMPONENT
 const ContextProvider = (props) => {
   const [input, setInput] = useState("");
   const [resentPrompt, setResentPromt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showResult, setShowResult] = useState(false);
+  // const [showResult, setShowResult] = useState(false);
   const [resultData, setResultData] = useState("");
   const [previousPrompt, setPreviousPrompt] = useState([]);
 
@@ -22,15 +28,19 @@ const ContextProvider = (props) => {
     setIsLoading(false);
     setResultData(false);
   };
+
+  // onSent function uses prompt parameter or input value to execute its function
   const onSent = async (prompt) => {
     setResultData("");
+
+    // LOADING IS DECLEAR TRUE AND AFTER DATA IS GENERATED IT IS DECLEARED TO FALSE
 
     setIsLoading(true);
     if (input !== "") {
       setPreviousPrompt((prev) => [...prev, input]);
     }
     setResentPromt(input || prompt);
-
+    // the  async run funtion from gemini component is called here inside the onsent function
     const response = await run(input || prompt);
     const splitResponse = response.split("**");
     let newResponse = "";
@@ -71,8 +81,8 @@ const ContextProvider = (props) => {
     isLoading,
     previousPrompt,
     setPreviousPrompt,
-    showResult,
-    setShowResult,
+    // showResult,
+    // setShowResult,
     resultData,
     setResultData,
     newChat,
